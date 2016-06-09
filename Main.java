@@ -1,10 +1,12 @@
 import Controller.MouseHandler;
 import Model.World;
 import View.UI;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -24,7 +26,19 @@ public class Main extends Application {
 
         Canvas canvas = new Canvas(ui.getScreenWidthPixels(), ui.getScreenHeightPixels());
 
-        theScene.setOnMouseClicked(MouseHandler::HandleMouseClicked);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        //theScene.setOnMouseClicked(MouseHandler::HandleMouseDown);
+        theScene.setOnMousePressed(MouseHandler::HandleMouseDown);
+        theScene.setOnMouseReleased(MouseHandler::HandleMouseReleased);
+
+        new AnimationTimer(){
+            @Override
+            public void handle(long currentNanoTime){
+                ui.drawWorld(w, gc);
+                MouseHandler.handleMouse(w);
+            }
+        }.start();
 
         root.getChildren().add(canvas);
         primaryStage.setScene(theScene);

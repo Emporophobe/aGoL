@@ -64,12 +64,12 @@ public class Grid {
 
     /**
      * Check if a cell is alive
-     * @param row The row of the cell
-     * @param col The column of the cell
+     * @param x The x-coordinate of the cell
+     * @param y The y-coordinate of the cell
      * @return Whether the cell at the given row and column is alive
      */
-    public boolean checkCell(int row, int col){
-        return _theGrid[col][row].isAlive();
+    public boolean checkCell(int x, int y){
+        return _theGrid[x][y].isAlive();
     }
 
     /**
