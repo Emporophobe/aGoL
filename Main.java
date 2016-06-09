@@ -28,15 +28,17 @@ public class Main extends Application {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        //theScene.setOnMouseClicked(MouseHandler::HandleMouseDown);
+        // Pass the world so the mouse handler can interact with it
+        MouseHandler.setWorld(w);
+
         theScene.setOnMousePressed(MouseHandler::HandleMouseDown);
-        theScene.setOnMouseReleased(MouseHandler::HandleMouseReleased);
+        theScene.setOnMouseDragged(MouseHandler::HandleMouseDrag);
 
         new AnimationTimer(){
             @Override
             public void handle(long currentNanoTime){
                 ui.drawWorld(w, gc);
-                MouseHandler.handleMouse(w);
+//                MouseHandler.handleMouse(w);
             }
         }.start();
 
