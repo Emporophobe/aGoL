@@ -1,4 +1,6 @@
+import Controller.KeyHandler;
 import Controller.MouseHandler;
+import Model.Grid;
 import Model.World;
 import View.UI;
 import javafx.animation.AnimationTimer;
@@ -30,9 +32,12 @@ public class Main extends Application {
 
         // Pass the world so the mouse handler can interact with it
         MouseHandler.setWorld(w);
+        KeyHandler.setWorld(w);
 
         theScene.setOnMousePressed(MouseHandler::HandleMouseDown);
         theScene.setOnMouseDragged(MouseHandler::HandleMouseDrag);
+
+        theScene.setOnKeyPressed(KeyHandler::HandleKeyPressed);
 
         new AnimationTimer() {
             @Override

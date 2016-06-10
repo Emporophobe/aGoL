@@ -23,7 +23,10 @@ public class World {
         return _grid;
     }
 
-    public void setGrid(Grid g){
-        _grid = g;
+    /**
+     * Update the grid to the next generation
+     */
+    public void update(){
+        _grid.update();
     }
 }

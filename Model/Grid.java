@@ -38,7 +38,7 @@ public class Grid {
      * @param c The cell
      * @return The number of neighbors
      */
-    int countNeighbors(Cell c){
+    private int countNeighbors(Cell c){
         int x = c.getXCoord();
         int y = c.getYCoord();
 
@@ -59,7 +59,8 @@ public class Grid {
             }
         }
 
-        return neighbors;
+        // Since we're counting neighbors, subtract the center one, if it's alive
+        return neighbors - (c.isAlive() ? 1 : 0);
     }
 
     /**
@@ -82,4 +83,28 @@ public class Grid {
         _theGrid[x][y].setAlive(alive);
     }
 
+    /**
+     * Progress the grid to the next generation
+     */
+    void update(){
+        Grid newGrid = new Grid(this._width, this._height);
+
+        for(int x = 0; x < _width; x++){
+            for (int y = 0; y < _height; y++){
+                int neighbors = countNeighbors(_theGrid[x][y]);
+
+                // Living cells stay alive with 2 or 3 neighbors, else they die
+                if (this.checkCell(x, y)) {
+                    boolean lives = (neighbors == 2 || neighbors == 3);
+                    newGrid.setCellAlive(lives, x, y);
+                }
+                // Dead cells become alive with exactly 3 neighbors
+                else{
+                    boolean lives = (neighbors == 3);
+                    newGrid.setCellAlive(lives, x, y);
+                }
+            }
+        }
+        this._theGrid = newGrid._theGrid;
+    }
 }
