@@ -10,7 +10,7 @@ public class UI {
     /**
      * The length of a side of the cell, in pixels
      */
-    public static final int cellSize = 15;
+    public static final int cellSize = 8;
     /**
      * The width of the window, in cells
      */
@@ -39,7 +39,7 @@ public class UI {
      * @param gc The graphics context
      */
     public void drawWorld(World w, GraphicsContext gc){
-        gc.setFill(Color.DARKGRAY);
+        gc.setFill(Color.color(0.1, 0.1, 0.1));
         gc.fillRect(0, 0, w.getWidth() * cellSize, w.getHeight() * cellSize);
         drawGrid(w.getGrid(), gc);
     }
@@ -60,15 +60,17 @@ public class UI {
     }
 
     /**
-     * Draw an alive cell
+     * Draw a living cell
      * @param x The cell's x-coordinate (in cell coordinates)
      * @param y The cell's y-coordinate (in cell coordinates)
      * @param gc The graphics context
      */
     private void drawCell(int x, int y, GraphicsContext gc){
         Point2D p = cellToScreen(x, y);
-        gc.setFill(Color.BLACK);
-        gc.fillRect(p.getX(), p.getY() - cellSize, cellSize, cellSize);
+        gc.setFill(Color.YELLOW);
+
+        // Make the filled in squares slightly smaller than the cell size, to show the borders
+        gc.fillRect(p.getX() + 1, p.getY() - cellSize + 1, cellSize - 2, cellSize - 2);
     }
 
     /**

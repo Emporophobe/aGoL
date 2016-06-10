@@ -23,7 +23,7 @@ public class Main extends Application {
         Group root = new Group();
         Scene theScene = new Scene(root);
 
-        World w = new World(75, 45);
+        World w = new World(160, 80);
         UI ui = new UI(w);
 
         Canvas canvas = new Canvas(ui.getScreenWidthPixels(), ui.getScreenHeightPixels());
