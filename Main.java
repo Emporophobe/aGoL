@@ -43,6 +43,9 @@ public class Main extends Application {
             @Override
             public void handle(long currentNanoTime) {
                 ui.drawWorld(w, gc);
+                if (w.isRunning()){
+                    w.update();
+                }
             }
         }.start();
 
